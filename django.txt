@@ -1,0 +1,71 @@
+1. 建立虛擬環境：
+
+python -m venv <venv_name>
+/<venv_name>/Scripts/activate.bat
+
+2. 安裝django和mongoengine：
+
+pip install django
+pip install mongoengine
+
+#pip install pycharm(optional)
+#IDE
+
+3. 建立 django project：
+
+django-admin startproject <project_name>
+cd <project_name>
+
+4. 建立 app：
+
+python manage.py startapp <app_name>
+python manage.py runserver
+ 
+setting.py 的installed_apps加入 <app_name>
+ 
+cd <app_name>
+mkdir templates
+在templates -> 建立<html_name>.html -> 建立網頁內容
+
+在<app_name>/views.py輸入
+def <view_name>(request): 
+	return render(request,<html_name>.html,{'data':'<html_name>.html'})
+
+在<server_test>/url.py輸入
+
+from <app_name>.views import <view_name>
+
+urlpattern =[
+	path('<url_name>/', <view_name>)
+]
+
+5. 設定database：
+model.py設定(database schema) => 注意!!!model.py如果有改 就一定要MIGRATION
+
+使用SQLite以外的資料庫要在setting.py修改：
+#############################################
+import mongoengine
+import pymongo
+
+MONGODB_HOST = 'mongodb://127.0.0.1:27017'
+mongoengine.connect(db='<db_name>', host=MONGODB_HOST,
+                    read_preference=pymongo.ReadPreference.PRIMARY_PREFERRED)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'ENFORCE_SCHEMA': True,
+        'NAME': '<db_name>',
+        'HOST': MONGODB_HOST,
+        'PORT': 27017
+    }
+}
+#############################################
+
+model.py設定完後
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+http://127.0.0.1:8000/<url_name>/

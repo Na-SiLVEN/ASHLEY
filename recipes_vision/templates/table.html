@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+        integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <!-- <link rel="stylesheet" href=".\recipe_vision\templates\bootstrap\css\bootstrap.css">
+    <script src=".\recipe_vision\templates\js\jquery-3.4.1.js"></script>
+    <script src=".\recipe_vision\templates\bootstrap\js\bootstrap.js"></script> -->
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <h2>Recipes Database</h2>
+        </div>
+    </div>
+    <div class="container">
+        <form action="/recipes/query" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" name="material" class="form-control" placeholder="請輸入食材" aria-label=""
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary"
+                        type="submit" id="button-addon2">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col">
+                <div class="ZipDatatable">
+                    <table id="ZipcodesTable" class="table table-striped ">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>料理</th>
+                                <th>作者</th>
+                                <th>簡介</th>
+                                <th>材料</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            {% for i in data %}
+                            <tr>
+                                <td>{{i.name}}</td>
+                                <td>{{ i.author }}</td>
+                                <td>{{ i.introduction }}</td>
+                                <td>{{ i.material }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
